@@ -13,6 +13,13 @@ Shoulda::Matchers.configure do |config|
     with.library :rails
   end
 end
+
+def login(user)
+  visit login_path
+  fill_in "Email address", with: "david@example.com"
+  fill_in "Password", with: "password"
+  click_on "Login"
+end
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
