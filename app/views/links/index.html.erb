@@ -28,6 +28,7 @@
         <td><%= link.title %></td>
         <td><%= link.url %></td>
         <td><%= link.read %></td>
+        <%= check_link_status(link.read) %>
       </tr>
       <% end %>
     </tbody>
