@@ -1,6 +1,6 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.where(user_id: current_user.id)
+    @links = Link.where(user: current_user)
   end
 
   def create
