@@ -38,6 +38,7 @@ RSpec.feature "User can edit a link" do
       end
     end
   end
+
   context 'their url must be valid' do
     scenario "they cannot submit the form with an invalid url" do
 
