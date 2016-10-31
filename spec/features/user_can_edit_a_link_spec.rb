@@ -64,7 +64,7 @@ RSpec.feature "User can edit a link" do
         click_on 'Save'
       end
 
-      expect(page).to have_content 'Invalid update. Please make sure your url is valid.'
+      expect(page).to have_content 'Invalid update. Please make sure you have a valid URL and enter all parameters.'
     end
   end
 end

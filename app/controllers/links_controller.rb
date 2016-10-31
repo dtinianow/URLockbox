@@ -4,16 +4,18 @@ class LinksController < ApplicationController
   end
 
   def create
-    if Link.create(
+    link = Link.new(
         user_id: current_user.id,
         title: link_params['title'],
         url: link_params['url']
       )
+    if link.save
       flash[:success] = "Successfully created link!"
       redirect_to links_path
     else
-      flash.now[:error] = 'Invalid link.'
-      render :new
+      flash.now[:error] = 'Invalid link. Please make sure you have a valid URL and enter all parameters.'
+      @links = Link.where(user: current_user)
+      render :index
     end
   end
 
@@ -27,7 +29,7 @@ class LinksController < ApplicationController
       flash[:success] = 'Successfully updated link.'
       redirect_to links_path
     else
-      flash.now[:error] = 'Invalid update. Please make sure your url is valid.'
+      flash.now[:error] = 'Invalid update. Please make sure you have a valid URL and enter all parameters.'
       render :edit
     end
   end
