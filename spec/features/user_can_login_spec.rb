@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.feature "User can login" do
   context 'with an existing account' do
     scenario "they visit the root path, enter credentials, and see homepage" do
-      User.create(username: 'david', password: 'password')
+      User.create(email_address: 'david@example.com', password: 'password')
 
       visit root_path
 
@@ -11,7 +11,7 @@ RSpec.feature "User can login" do
 
       expect(current_path).to eq(login_path)
 
-      fill_in "Username", with: "someguy"
+      fill_in "Email address", with: "someguy"
       fill_in "Password", with: "password"
       click_on "Login"
 
@@ -24,13 +24,13 @@ RSpec.feature "User can login" do
 
   xcontext 'by creating a new account' do
     scenario "they submit credentials and end up on dashboard" do
-      User.create(username: "david", password: "password")
+      User.create(email_address: "david@example.com", password: "password")
 
       visit root_path
 
       click_on "Create New Account"
 
-      fill_in "Username", with: "david"
+      fill_in "Email Address", with: "david"
       fill_in "Password", with: "password"
       click_button "Create New Account"
 
@@ -41,11 +41,11 @@ RSpec.feature "User can login" do
 
   xcontext 'they can logout once logged in' do
     scenario "they click logout and return to root path" do
-      User.create(username: "david", password: "password")
+      User.create(email_address: "david@example.com", password: "password")
 
       visit root_path
 
-      fill_in "Username", with: "david"
+      fill_in "Email Address", with: "david"
       fill_in "Password", with: "password"
       click_button "Login"
       click_on "Logout"
