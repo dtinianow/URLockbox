@@ -25,9 +25,9 @@
     <tbody>
       <% @links.each do |link| %>
       <tr>
-        <td><%= link.title %></td>
-        <td><%= link.url %></td>
-        <td><%= link.read %></td>
+        <td class='link-title'><%= link.title %></td>
+        <td class='link-url'><%= link.url %></td>
+        <td class='link-read-status'><%= link.read %></td>
         <%= check_link_status(link.read) %>
       </tr>
       <% end %>
