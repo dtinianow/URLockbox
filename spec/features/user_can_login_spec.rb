@@ -15,7 +15,7 @@ RSpec.feature "User can login" do
       fill_in "Password", with: "password"
       click_on "Login"
 
-      expect(current_path).to eq(links_path)
+      expect(current_path).to eq(root_path)
       expect(page).to have_content("Logged in as david")
       expect(page).to have_no_content("Login")
       expect(page).to have_content("Logout")

@@ -1,6 +1,6 @@
 <ul>
   <% if current_user %>
-  <li>Welcome, <%= current_user.email_address %></li>
+  <li>You are logged in as <%= current_user.email_address %></li>
   <li><%= link_to "My Links", links_path %></li>
   <li><%= link_to "Logout", logout_path, method: :delete %></li>
   <% else %>
