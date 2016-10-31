@@ -2,7 +2,7 @@
 
 <h1>My Links</h1>
 
-<h3>Submit a New Link:</h3>
+<h4>Submit a New Link:</h4>
 <div id="new-link-form">
   <%= form_for :link do |f| %>
   <%= f.text_field :title, placeholder: "Title" %>
@@ -10,16 +10,26 @@
   <%= f.submit "Save" %>
   <% end %>
 </div>
+<br>
+<br>
 
-
-<h3>Current Links</h3>
 <div class='form-group text-center well'>
   <form id='search-ideas' class="ui-filterable">
-    <label>Search:</label>
+    <label>Search Current Links:</label>
     <input id="linkFilter" data-type="search">
   </form>
 </div>
 <br>
+
+<h4>Filter By:</h4>
+<div id='filter-by-status'>
+  <button id='show-all'>All</button>
+  <button id='show-only-read'>Read</button>
+  <button id='show-only-unread'>Unread</button>
+</div>
+<br>
+<br>
+
 <div id='results'>
   <table id='links-table'>
     <thead>

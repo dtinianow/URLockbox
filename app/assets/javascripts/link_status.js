@@ -1,6 +1,9 @@
 $(document).ready(function() {
   onClickChangeReadStatus();
   searchLinks();
+  filterReadLinks();
+  filterUnreadLinks();
+  filterAllLinks();
 });
 
 function onClickChangeReadStatus() {
@@ -49,5 +52,43 @@ function checkMatches(searchQuery) {
     } else {
       $(link).hide();
     }
+  })
+}
+
+function filterReadLinks() {
+  $('#show-only-read').on('click', function() {
+    var $links = $('#links-table').find('.link')
+    $.each($links, function(index, link) {
+      var status = $(link).find('.link-read-status').text()
+      if (status === true) {
+        $(link).show();
+      } else {
+        $(link).hide();
+      }
+    })
+  })
+}
+
+function filterUnreadLinks() {
+  $('#show-only-unread').on('click', function() {
+    var $links = $('#links-table').find('.link')
+    $.each($links, function(index, link) {
+      var status = $(link).find('.link-read-status').text()
+      if (status === false) {
+        $(link).show();
+      } else {
+        $(link).hide();
+      }
+    })
+  })
+}
+
+function filterAllLinks() {
+  $('#show-all').on('click', function() {
+    var $links = $('#links-table').find('.link')
+    $.each($links, function(index, link) {
+      var status = $(link).find('.link-read-status').text()
+      $(link).show();
+    })
   })
 }
