@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 function onClickChangeReadStatus() {
-  $('#links-table').on('click', '.read-link', function() {
+  $('#links-table').on('click', '.read-status', function() {
     var $link = $(this).closest('tr');
     var link_id = $link.data('link-id');
     var user_id = $link.data('user-id');
@@ -23,16 +23,4 @@ function changeReadStatus(newStatus, link_id, user_id, $linkStatus) {
   $linkStatus.text(newStatus);
 }
 
-
 function handleError(error) { console.log(error) };
-
-
-// function editIdeaQuality(newQuality, $idea, $quality){
-//   $.ajax({
-//     url: '/api/v1/ideas/' + $idea.data('id'),
-//     type: 'put',
-//     data: { idea: { quality: newQuality } }
-//   }).fail(handleError)
-//   $quality.text(newQuality);
-// }
-//
