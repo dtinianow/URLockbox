@@ -32,7 +32,6 @@ function changeReadStatus(newStatus, link_id, user_id, $linkStatus, $linkButton)
 
 function handleError(error) { console.log(error) };
 
-
 function searchLinks() {
   $('#linkFilter').on('keyup', function(){
     var $searchQuery = $('#linkFilter').val()

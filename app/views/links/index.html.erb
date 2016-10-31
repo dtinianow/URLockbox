@@ -33,7 +33,7 @@
     </thead>
     <tbody>
       <% @links.each do |link| %>
-      <tr class='stuff' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
+      <tr class='link' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
         <td class='link-title'><%= link.title %></td>
         <td class='link-url'><%= link.url %></td>
         <td class='link-read-status'><%= link.read %></td>
