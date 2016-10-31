@@ -23,15 +23,14 @@ RSpec.feature "User can login" do
   end
 
   context 'by creating a new account' do
-    scenario "they submit credentials and end up on dashboard" do
-      User.create(email_address: "david@example.com", password: "password")
-
+    scenario "they submit valid credentials and end up on homepage" do
       visit root_path
 
       click_on "Create New Account"
 
       fill_in "Email address", with: "david@example.com"
       fill_in "Password", with: "password"
+      fill_in "Password confirmation", with: "password"
       click_button "Create Account"
 
       expect(current_path).to eq(root_path)
