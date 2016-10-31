@@ -1,1 +1,16 @@
 <h1>My Links</h1>
+
+<div 'results'>
+  <table data-filter='true' data-input'#linkFilter' id='links-table'>
+    <thead>
+      <tr>Title</tr>
+      <tr>Url</tr>
+    </thead>
+    <tbody>
+      <%= @links.each do |link| %>
+        <tr><%= link.title %></tr>
+        <tr><%= link.url %></tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

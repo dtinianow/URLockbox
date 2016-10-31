@@ -3,5 +3,6 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates_confirmation_of :password
 
+  has_many :links
   has_secure_password
 end
