@@ -1,5 +1,20 @@
 class LinksController < ApplicationController
   def index
-    @links = current_user.links
+    @links = Link.where(user_id: current_user.id)
+  end
+
+  def create
+    Link.create(
+      user_id: current_user.id,
+      title: link_params['title'],
+      url: link_params['url']
+    )
+    redirect_to links_path
+  end
+
+private
+
+  def link_params
+    params.require(:link).permit(:title, :url)
   end
 end
