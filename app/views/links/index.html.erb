@@ -19,7 +19,7 @@
         <th>Title</th>
         <th>Url</th>
         <th>Read</th>
-        <th>Change Read Status</th>
+        <th>Change Status</th>
         <th>Edit Link</th>
       </tr>
     </thead>
@@ -30,7 +30,7 @@
         <td class='link-url'><%= link.url %></td>
         <td class='link-read-status'><%= link.read %></td>
         <td><%= check_link_status(link.read) %></td>
-        <td class='edit-link'><button><%= link_to 'Edit', edit_link_path(link), method: :put %></button></td>
+        <td class='edit-link'><p><%= link_to 'Edit', edit_link_path(link) %></p></td>
       </tr>
       <% end %>
     </tbody>

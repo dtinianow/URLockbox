@@ -17,7 +17,7 @@ RSpec.feature "User can edit a link" do
         expect(page).to have_content(link.read)
       end
 
-      click_button 'Edit'
+      click_on 'Edit'
 
       expect(current_path).to eq edit_link_path(link)
 
