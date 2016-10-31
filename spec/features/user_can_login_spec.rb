@@ -11,12 +11,12 @@ RSpec.feature "User can login" do
 
       expect(current_path).to eq(login_path)
 
-      fill_in "Email address", with: "someguy"
+      fill_in "Email address", with: "david@example.com"
       fill_in "Password", with: "password"
       click_on "Login"
 
       expect(current_path).to eq(root_path)
-      expect(page).to have_content("Logged in as david")
+      expect(page).to have_content("Logged in as david@example.com")
       expect(page).to have_no_content("Login")
       expect(page).to have_content("Logout")
     end
@@ -30,7 +30,7 @@ RSpec.feature "User can login" do
 
       click_on "Create New Account"
 
-      fill_in "Email Address", with: "david"
+      fill_in "Email Address", with: "david@example.com"
       fill_in "Password", with: "password"
       click_button "Create New Account"
 
@@ -45,12 +45,12 @@ RSpec.feature "User can login" do
 
       visit root_path
 
-      fill_in "Email Address", with: "david"
+      fill_in "Email Address", with: "david@example.com"
       fill_in "Password", with: "password"
       click_button "Login"
       click_on "Logout"
 
-      expect(page).to have_no_content("Logged in as david")
+      expect(page).to have_no_content("Logged in as david@example.com")
       expect(page).to have_content("Login")
       expect(page).to have_no_content("Logout")
     end
