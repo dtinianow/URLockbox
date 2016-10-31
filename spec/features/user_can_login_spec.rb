@@ -22,7 +22,7 @@ RSpec.feature "User can login" do
     end
   end
 
-  xcontext 'by creating a new account' do
+  context 'by creating a new account' do
     scenario "they submit credentials and end up on dashboard" do
       User.create(email_address: "david@example.com", password: "password")
 
@@ -30,22 +30,22 @@ RSpec.feature "User can login" do
 
       click_on "Create New Account"
 
-      fill_in "Email Address", with: "david@example.com"
+      fill_in "Email address", with: "david@example.com"
       fill_in "Password", with: "password"
-      click_button "Create New Account"
+      click_button "Create Account"
 
-      expect(current_path).to eq(dashboard_path)
-      expect(page).to have_content("Logged in as david")
+      expect(current_path).to eq(root_path)
+      expect(page).to have_content("Logged in as david@example.com")
     end
   end
 
-  xcontext 'they can logout once logged in' do
+  context 'they can logout once logged in' do
     scenario "they click logout and return to root path" do
       User.create(email_address: "david@example.com", password: "password")
 
-      visit root_path
+      visit login_path
 
-      fill_in "Email Address", with: "david@example.com"
+      fill_in "Email address", with: "david@example.com"
       fill_in "Password", with: "password"
       click_button "Login"
       click_on "Logout"
