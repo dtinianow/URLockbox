@@ -5,18 +5,29 @@ class LinksController < ApplicationController
 
   def create
     Link.create(
-      user_id: current_user.id,
-      title: link_params['title'],
-      url: link_params['url']
+    user_id: current_user.id,
+    title: link_params['title'],
+    url: link_params['url']
     )
     redirect_to links_path
   end
 
   def edit
-    @link = Link.find(params[:id])
+    @link = Link.find_by(user: current_user, id: params[:id])
   end
 
-private
+  def update
+    @link = Link.find_by(user: current_user, id: params[:id])
+    if Link.update(link_params)
+      flash[:success] = 'Successfully updated link.'
+      redirect_to links_path
+    else
+      flash.now[:error] = 'Invalid update. Please make sure your url is valid.'
+      render :edit
+    end
+  end
+
+  private
 
   def link_params
     params.require(:link).permit(:title, :url)
