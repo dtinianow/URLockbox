@@ -33,16 +33,13 @@ function updateStatus(newStatus, link_id, user_id) {
 function changeButtonText(newStatus, $link) {
   var $linkStatus = $link.find('.link-read-status');
   var $linkButton = $link.find('.read-status');
-  var $linkTitle = $link.find('.link-title');
   var $linkUrl = $link.find('.link-url');
 
   $linkStatus.text(newStatus);
   if ($linkButton.text() == 'Mark as Read') {
-    $linkTitle.addClass('read-link')
     $linkUrl.addClass('read-link')
     $linkButton.text('Mark as Unread');
   } else {
-    $linkTitle.removeClass('read-link')
     $linkUrl.removeClass('read-link')
     $linkButton.text('Mark as Read');
   };

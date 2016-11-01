@@ -44,7 +44,7 @@
     <tbody>
       <% @links.each do |link| %>
       <tr class='link' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
-        <td class="link-title<%= ' read-link' if link.read %>"><%= link.title %></td>
+        <td class="link-title"><%= link.title %></td>
         <td class="link-url<%= ' read-link' if link.read %>"><%= link.url %></td>
         <td class='link-read-status'><%= link.read %></td>
         <td><%= check_link_status(link.read) %></td>
