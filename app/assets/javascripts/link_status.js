@@ -38,16 +38,12 @@ function changeButtonText(newStatus, $link) {
 
   $linkStatus.text(newStatus);
   if ($linkButton.text() == 'Mark as Read') {
-    $linkTitle.css("text-decoration", "line-through")
-    $linkUrl.css("text-decoration", "line-through")
-    // $linkTitle.addClass('read-link')
-    // $linkUrl.addClass('read-link')
+    $linkTitle.addClass('read-link')
+    $linkUrl.addClass('read-link')
     $linkButton.text('Mark as Unread');
   } else {
-    // $linkTitle.removeClass('read-link')
-    // $linkUrl.removeClass('read-link')
-    $linkTitle.css("text-decoration", "none")
-    $linkUrl.css("text-decoration", "none")
+    $linkTitle.removeClass('read-link')
+    $linkUrl.removeClass('read-link')
     $linkButton.text('Mark as Read');
   };
 };
