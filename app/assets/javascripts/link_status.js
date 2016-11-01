@@ -11,12 +11,10 @@ function onClickChangeReadStatus() {
     var $link = $(this).closest('tr');
     var link_id = $link.data('link-id');
     var user_id = $link.data('user-id');
-    var $linkStatus = $link.find('.link-read-status')
-    var $linkButton = $link.find('.read-status')
-    var status = $linkStatus.text();
+    var status = $link.find('.link-read-status').text();
     var newStatus = checkStatus(status);
     updateStatus(newStatus, link_id, user_id);
-    changeButtonText(newStatus, $linkButton, $linkStatus);
+    changeButtonText(newStatus, $link);
   })
 };
 
@@ -32,11 +30,24 @@ function updateStatus(newStatus, link_id, user_id) {
   }).fail(handleError)
 };
 
-function changeButtonText(newStatus, $linkButton, $linkStatus) {
+function changeButtonText(newStatus, $link) {
+  var $linkStatus = $link.find('.link-read-status');
+  var $linkButton = $link.find('.read-status');
+  var $linkTitle = $link.find('.link-title');
+  var $linkUrl = $link.find('.link-url');
+
   $linkStatus.text(newStatus);
   if ($linkButton.text() == 'Mark as Read') {
+    $linkTitle.css("text-decoration", "line-through")
+    $linkUrl.css("text-decoration", "line-through")
+    // $linkTitle.addClass('read-link')
+    // $linkUrl.addClass('read-link')
     $linkButton.text('Mark as Unread');
   } else {
+    // $linkTitle.removeClass('read-link')
+    // $linkUrl.removeClass('read-link')
+    $linkTitle.css("text-decoration", "none")
+    $linkUrl.css("text-decoration", "none")
     $linkButton.text('Mark as Read');
   };
 };
