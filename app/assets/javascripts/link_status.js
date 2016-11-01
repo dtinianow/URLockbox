@@ -15,20 +15,16 @@ function onClickChangeReadStatus() {
     var $linkButton = $link.find('.read-status')
     var status = $linkStatus.text();
     var newStatus = checkStatus(status);
-    changeReadStatus(newStatus, link_id, user_id);
+    updateStatus(newStatus, link_id, user_id);
     changeButtonText(newStatus, $linkButton, $linkStatus);
   })
 };
 
 function checkStatus(status) {
-  if (status === 'false') {
-    return true;
-  } else {
-    return false;
-  };
+  return status === 'false' ? true : false;
 };
 
-function changeReadStatus(newStatus, link_id, user_id) {
+function updateStatus(newStatus, link_id, user_id) {
   $.ajax({
     url: "/api/v1/users/" + user_id + "/links/" + link_id,
     type: 'put',
