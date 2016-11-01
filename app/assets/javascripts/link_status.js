@@ -13,18 +13,30 @@ function onClickChangeReadStatus() {
     var user_id = $link.data('user-id');
     var $linkStatus = $link.find('.link-read-status')
     var $linkButton = $link.find('.read-status')
-    var status = $linkStatus.text().toString();
-    var newStatus = !status;
-    changeReadStatus(newStatus, link_id, user_id, $linkStatus, $linkButton);
+    var status = $linkStatus.text();
+    var newStatus = checkStatus(status);
+    changeReadStatus(newStatus, link_id, user_id, $linkButton);
+    changeButtonText(newStatus, $linkButton, $linkStatus);
   })
 };
 
-function changeReadStatus(newStatus, link_id, user_id, $linkStatus, $linkButton) {
+function checkStatus(status) {
+  if (status === 'false') {
+    return true;
+  } else {
+    return false;
+  };
+};
+
+function changeReadStatus(newStatus, link_id, user_id, $linkButton) {
   $.ajax({
     url: "/api/v1/users/" + user_id + "/links/" + link_id,
     type: 'put',
     data: { link: { read: newStatus } }
   }).fail(handleError)
+};
+
+function changeButtonText(newStatus, $linkButton, $linkStatus) {
   $linkStatus.text(newStatus);
   if ($linkButton.text() == 'Mark as Read') {
     $linkButton.text('Mark as Unread');
