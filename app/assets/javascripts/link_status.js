@@ -7,7 +7,7 @@ $(document).ready(function() {
 });
 
 function onClickChangeReadStatus() {
-  $('#links-table').on('click', '.read-status', function() {
+  $('#links-table').on('click', '.read-status', function(e) {
     var $link = $(this).closest('tr');
     var link_id = $link.data('link-id');
     var user_id = $link.data('user-id');
@@ -15,7 +15,7 @@ function onClickChangeReadStatus() {
     var $linkButton = $link.find('.read-status')
     var status = $linkStatus.text();
     var newStatus = checkStatus(status);
-    changeReadStatus(newStatus, link_id, user_id, $linkButton);
+    changeReadStatus(newStatus, link_id, user_id);
     changeButtonText(newStatus, $linkButton, $linkStatus);
   })
 };
@@ -28,7 +28,7 @@ function checkStatus(status) {
   };
 };
 
-function changeReadStatus(newStatus, link_id, user_id, $linkButton) {
+function changeReadStatus(newStatus, link_id, user_id) {
   $.ajax({
     url: "/api/v1/users/" + user_id + "/links/" + link_id,
     type: 'put',

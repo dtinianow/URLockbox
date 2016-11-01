@@ -4,8 +4,8 @@ class Api::V1::LinksController < ApplicationController
   end
 
   def update
-    Link.find_by(user: params[:user_id], id: params[:link_id])
-    link = Link.update(link_params)
+    link = Link.find_by(user: params[:user_id], id: params[:link_id])
+    link.update(link_params)
     render json: link
   end
 
