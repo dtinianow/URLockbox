@@ -26,6 +26,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'lodash-rails'
 gem 'figaro'
+gem "twitter-bootstrap-rails"
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
