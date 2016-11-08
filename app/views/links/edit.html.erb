@@ -1,8 +1,13 @@
 <h1>Edit Link</h1>
-<div id="edit-link-form">
+<div id="edit-link-form" class="well new-form">
   <%= form_for @link do |f| %>
+  <%= f.label :title %>
   <%= f.text_field :title, placeholder: "Title" %>
+  <br>
+  <%= f.label :url %>
   <%= f.url_field :url, placeholder: "URL" %>
+  <br>
+  <br>
   <%= f.submit "Save" %>
   <% end %>
 </div>

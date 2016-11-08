@@ -8,9 +8,11 @@
   <%= javascript_include_tag 'application' %>
 </head>
 <body>
-  <% flash.each do |type, message| %>
+  <div class='container'>
+    <% flash.each do |type, message| %>
     <%= content_tag :div, sanitize(message), class: "alert alert-#{type}" %>
-  <% end %>
-  <%= yield %>
+    <% end %>
+    <%= yield %>
+  </div>
 </body>
 </html>
