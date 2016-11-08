@@ -1,64 +1,76 @@
-<h4><%= link_to 'Logout', logout_path, method: :delete %></h4>
+<div class='container'>
+  <h4><%= link_to 'Logout', logout_path, method: :delete %></h4>
 
-<h1>My Links</h1>
+  <h1 class='text-center well'>My Links</h1>
 
-<h4>Submit a New Link:</h4>
-<div id="new-link-form">
-  <%= form_for :link do |f| %>
-  <%= f.text_field :title, placeholder: "Title" %>
-  <%= f.url_field :url, placeholder: "URL" %>
-  <%= f.submit "Save" %>
-  <% end %>
-</div>
-<p>You can also email your new link to a friend! Simply enter your URL in this format: 'http://example.com \:cc friend@example.com' </p>
-<p>Note: URL must be prefaced by 'http:' or 'https:'</p>
-<br>
+  <div class='row'>
+    <div class='col-md-12 text-center'>
+      <h4>Submit a New Link:</h4>
+      <h6>(Must include http or https):</h6>
+      <div id="new-link-form">
+        <%= form_for :link do |f| %>
+        <%= f.text_field :title, placeholder: "Title" %>
+        <%= f.url_field :url, placeholder: "URL" %>
+        <%= f.submit "Save" %>
+        <% end %>
+      </div>
+      <br>
+      <p>Email a link to a friend! Simply enter your URL in this format: 'http://example.com \:cc friend@example.com' </p>
+    </div>
+  </div>
+  <br>
 
-<h4>Filter By:</h4>
-<div id='filter-by-status'>
-  <button id='show-all'>All</button>
-  <button id='show-only-read'>Read</button>
-  <button id='show-only-unread'>Unread</button>
-</div>
-<br>
+  <div class='row well'>
+    <div class='col-md-4 text-center'>
+      <h4>Filter By:</h4>
+      <div id='filter-by-status'>
+        <button id='show-all'>All</button>
+        <button id='show-only-read'>Read</button>
+        <button id='show-only-unread'>Unread</button>
+      </div>
+    </div>
 
-<h4>Sort in Alphabetical Order:</h4>
-<div id='alphabetic-sort'>
-  <button id='alphabetic-sort-button' >Alphabetic Sort</button>
-</div>
-<br>
-<br>
+    <div class='col-md-4 text-center'>
+      <h4>Search Current Links:</h4>
+      <form id='search-ideas' class="ui-filterable">
+        <input id="linkFilter" data-type="search">
+      </form>
+    </div>
 
-<div class='form-group text-center well'>
-  <form id='search-ideas' class="ui-filterable">
-    <label>Search Current Links:</label>
-    <input id="linkFilter" data-type="search">
-  </form>
-</div>
-<br>
-<br>
+    <div class='col-md-4 text-center'>
+      <h4>Sort in Alphabetical Order:</h4>
+      <div id='alphabetic-sort'>
+        <button id='alphabetic-sort-button' >Alphabetic Sort</button>
+      </div>
+    </div>
 
-<div id='results'>
-  <table id='links-table'>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Url</th>
-        <th>Read</th>
-        <th>Change Status</th>
-        <th>Edit Link</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @links.each do |link| %>
-      <tr class='link' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
-        <td class="link-title"><%= link.title %></td>
-        <td class="link-url<%= ' read-link' if link.read %>"><%= link_to link.url, link.url, class: 'link-text' %></td>
-        <td class='link-read-status'><%= link.read %></td>
-        <td><%= check_link_status(link.read) %></td>
-        <td class='edit-link'><p><%= link_to 'Edit', edit_link_path(link) %></p></td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+
+  </div>
+
+  <br>
+
+  <div id='results'>
+    <table id='links-table' class='table table-striped table-bordered table-condensed'>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Url</th>
+          <th>Read</th>
+          <th>Change Status</th>
+          <th>Edit Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @links.each do |link| %>
+        <tr class='link' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
+          <td class="link-title"><%= link.title %></td>
+          <td class="link-url<%= ' read-link' if link.read %>"><%= link_to link.url, link.url, class: 'link-text' %></td>
+          <td class='link-read-status'><%= link.read %></td>
+          <td><%= check_link_status(link.read) %></td>
+          <td class='edit-link'><p><%= link_to 'Edit', edit_link_path(link) %></p></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 </div>
