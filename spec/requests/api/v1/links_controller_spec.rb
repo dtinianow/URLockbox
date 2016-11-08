@@ -34,11 +34,9 @@ describe 'Links' do
 
       put "/api/v1/users/#{user.id}/links/#{saved_link.id}", link: params
 
-      links = JSON.parse(response.body)
-      link = links.first
+      link = JSON.parse(response.body)
 
       expect(response).to be_success
-      expect(links.class).to eq(Array)
       expect(link.class).to eq(Hash)
       expect(link['title']).to eq('Google')
       expect(link['url']).to eq('http://google.com')
