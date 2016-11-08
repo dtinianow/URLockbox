@@ -51,7 +51,7 @@
       <% @links.each do |link| %>
       <tr class='link' data-user-id=<%= current_user.id %> data-link-id=<%= link.id %>>
         <td class="link-title"><%= link.title %></td>
-        <td class="link-url<%= ' read-link' if link.read %>"><%= link_to link.url, link.url, class: 'link-to-text' %></td>
+        <td class="link-url<%= ' read-link' if link.read %>"><%= link_to link.url, link.url, class: 'link-text' %></td>
         <td class='link-read-status'><%= link.read %></td>
         <td><%= check_link_status(link.read) %></td>
         <td class='edit-link'><p><%= link_to 'Edit', edit_link_path(link) %></p></td>

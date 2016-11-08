@@ -4,6 +4,7 @@ class LinksController < ApplicationController
   end
 
   def create
+    link_params['url'] = Link.parse(link_params['url'])
     link = current_user.links.new(link_params)
     if link.save
       flash[:success] = "Successfully created link!"
