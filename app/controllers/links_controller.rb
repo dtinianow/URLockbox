@@ -4,18 +4,17 @@ class LinksController < ApplicationController
   end
 
   def create
-    parsed_link = Link.parse(link_params['url'])
-    url = parsed_link.first
-    recipient = parsed_link.last
-    link = current_user.links.new(url: url, title: link_params['title'])
-    if link.save
-      UserNotifier.send_link(current_user, recipient, url).deliver_now
+    parsed_link = LinkParser.new(link_params[:url])
+    link = current_user.links.new(url: parsed_link.url , title: link_params[:title])
+    if link.save && parsed_link.should_be_emailed?
+      UserNotifier.send_link(current_user, parsed_link.recipient, parsed_link.url).deliver_now
+      flash[:success] = "Successfully created link and sent email to #{parsed_link.recipient}!"
+    elsif link.save
       flash[:success] = "Successfully created link!"
-      redirect_to links_path
     else
       flash[:error] = 'Invalid link. Please make sure you have a valid URL and enter all parameters.'
-      redirect_to links_path
     end
+    redirect_to links_path
   end
 
   def edit
@@ -24,7 +23,8 @@ class LinksController < ApplicationController
 
   def update
     @link = current_user.links.find(params[:id])
-    if @link.update(link_params)
+    parsed_link = LinkParser.new(link_params[:url])
+    if @link.update(url: parsed_link.url, title: link_params[:title])
       flash[:success] = 'Successfully updated link.'
       redirect_to links_path
     else
