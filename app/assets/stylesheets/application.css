@@ -17,3 +17,8 @@
 .read-link {
   text-decoration: line-through;
 }
+
+a.link-to-text {
+  text-decoration: underline;
+  color: black;
+}
