@@ -54,4 +54,32 @@ RSpec.feature "User can login" do
       expect(page).to have_no_content("Logout")
     end
   end
+
+  context 'they cannot login with invalid credentials' do
+    scenario 'they enter an invalid username and cannot login' do
+      User.create(email_address: "david@example.com", password: "password")
+
+      visit login_path
+
+      fill_in "Email address", with: "somebody@example.com"
+      fill_in "Password", with: "password"
+      click_button "Login"
+
+      expect(page).to have_content("Invalid login")
+      expect(current_path).to eq login_path
+    end
+
+    scenario 'they enter an invalid password and cannot login' do
+      User.create(email_address: "david@example.com", password: "password")
+
+      visit login_path
+
+      fill_in "Email address", with: "somebody@example.com"
+      fill_in "Password", with: "nothing"
+      click_button "Login"
+
+      expect(page).to have_content("Invalid login")
+      expect(current_path).to eq login_path
+    end
+  end
 end
