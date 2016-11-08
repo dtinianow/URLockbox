@@ -1,9 +1,9 @@
 $(document).ready(function() {
   onClickChangeReadStatus();
   searchLinks();
-  filterReadLinks();
-  filterUnreadLinks();
-  filterAllLinks();
+  filterLinksByStatus('#show-only-unread', 'false');
+  filterLinksByStatus('#show-only-read', 'true');
+  showAllLinks();
 });
 
 function onClickChangeReadStatus() {
@@ -15,7 +15,7 @@ function onClickChangeReadStatus() {
     var newStatus = checkStatus(status);
     updateStatus(newStatus, link_id, user_id);
     changeButtonText(newStatus, $link);
-  })
+  });
 };
 
 function checkStatus(status) {
@@ -27,7 +27,7 @@ function updateStatus(newStatus, link_id, user_id) {
     url: "/api/v1/users/" + user_id + "/links/" + link_id,
     type: 'put',
     data: { link: { read: newStatus } }
-  }).fail(handleError)
+  }).fail(handleError);
 };
 
 function changeButtonText(newStatus, $link) {
@@ -37,10 +37,10 @@ function changeButtonText(newStatus, $link) {
 
   $linkStatus.text(newStatus);
   if ($linkButton.text() == 'Mark as Read') {
-    $linkUrl.addClass('read-link')
+    $linkUrl.addClass('read-link');
     $linkButton.text('Mark as Unread');
   } else {
-    $linkUrl.removeClass('read-link')
+    $linkUrl.removeClass('read-link');
     $linkButton.text('Mark as Read');
   };
 };
@@ -49,10 +49,10 @@ function handleError(error) { console.log(error) };
 
 function searchLinks() {
   $('#linkFilter').on('keyup', function(){
-    var $searchQuery = $('#linkFilter').val()
-    checkMatches($searchQuery)
-  })
-}
+    var $searchQuery = $('#linkFilter').val();
+    checkMatches($searchQuery);
+  });
+};
 
 function checkMatches(searchQuery) {
   var $links = $('#links-table').find('.link')
@@ -63,44 +63,33 @@ function checkMatches(searchQuery) {
       $(link).show();
     } else {
       $(link).hide();
-    }
-  })
-}
+    };
+  });
+};
 
-function filterReadLinks() {
-  $('#show-only-read').on('click', function() {
+function filterLinksByStatus(statusClass, condition) {
+  $(statusClass).on('click', function() {
     var $links = $('#links-table').find('.link')
     $.each($links, function(index, link) {
-      var status = $(link).find('.link-read-status').text()
-      if (status === true) {
-        $(link).show();
-      } else {
-        $(link).hide();
-      }
-    })
-  })
-}
+      applyFilterBasedOnStatus(link, condition);
+    });
+  });
+};
 
-function filterUnreadLinks() {
-  $('#show-only-unread').on('click', function() {
-    var $links = $('#links-table').find('.link')
-    $.each($links, function(index, link) {
-      var status = $(link).find('.link-read-status').text()
-      if (status === false) {
-        $(link).show();
-      } else {
-        $(link).hide();
-      }
-    })
-  })
-}
+function applyFilterBasedOnStatus(link, condition) {
+  var status = $(link).find('.link-read-status').text()
+  if (status === condition) {
+    $(link).show();
+  } else {
+    $(link).hide();
+  };
+};
 
-function filterAllLinks() {
+function showAllLinks() {
   $('#show-all').on('click', function() {
-    var $links = $('#links-table').find('.link')
+    var $links = $('#links-table').find('.link');
     $.each($links, function(index, link) {
-      var status = $(link).find('.link-read-status').text()
       $(link).show();
-    })
-  })
-}
+    });
+  });
+};
