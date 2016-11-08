@@ -1,15 +1,20 @@
 class LinkParser
-  attr_reader :parsed_input, :url, :command, :recipient
+  attr_reader :parsed_input
 
   def initialize(input)
-    @parsed_input = parse(input)
-    @url          = parsed_input[0]
-    @command      = parsed_input[1]
-    @recipient    = parsed_input[2]
+    @parsed_input = input.split(' ')
   end
 
-  def parse(input)
-    input.split(' ')
+  def url
+    parsed_input[0]
+  end
+
+  def command
+    parsed_input[1]
+  end
+
+  def recipient
+    parsed_input[2]
   end
 
   def should_be_emailed?
