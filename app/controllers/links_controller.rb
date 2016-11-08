@@ -4,9 +4,12 @@ class LinksController < ApplicationController
   end
 
   def create
-    link_params['url'] = Link.parse(link_params['url'])
-    link = current_user.links.new(link_params)
+    parsed_link = Link.parse(link_params['url'])
+    url = parsed_link.first
+    recipient = parsed_link.last
+    link = current_user.links.new(url: url, title: link_params['title'])
     if link.save
+      UserNotifier.send_link(current_user, recipient, url).deliver_now
       flash[:success] = "Successfully created link!"
       redirect_to links_path
     else
