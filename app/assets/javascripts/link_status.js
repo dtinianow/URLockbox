@@ -4,6 +4,7 @@ $(document).ready(function() {
   filterLinksByStatus('#show-only-unread', 'false');
   filterLinksByStatus('#show-only-read', 'true');
   showAllLinks();
+  alphabeticSort();
 });
 
 function onClickChangeReadStatus() {
@@ -92,4 +93,30 @@ function showAllLinks() {
       $(link).show();
     });
   });
+};
+
+function alphabeticSort() {
+  $('#alphabetic-sort-button').on('click', function() {
+    var $links = $('#links-table').find('.link');
+    var $sortedLinks = _.sortBy($links, function(link) {
+      return $(link).find('.link-title').text().toLowerCase();
+    });
+    addSortedLinksToTable($sortedLinks)
+  });
+};
+
+function addSortedLinksToTable($sortedLinks) {
+  if ($('#alphabetic-sort').hasClass('ascending-order')) {
+    $.each($sortedLinks, function(index, link) {
+      $('#links-table').prepend(link);
+    });
+    $('#alphabetic-sort').removeClass('ascending-order');
+    $('#alphabetic-sort').addClass('descending-order');
+  } else {
+    $.each($sortedLinks, function(index, link) {
+      $('#links-table').append(link);
+    });
+    $('#alphabetic-sort').removeClass('descending-order');
+    $('#alphabetic-sort').addClass('ascending-order');
+  };
 };
