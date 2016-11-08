@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "User can edit a link", js: true do
-  context 'they click edit on their homepage' do
-    scenario "they fill out a form and the changes appear on their homepage" do
+RSpec.feature "User can change read status of a link", js: true do
+  context 'they click the change status button' do
+    scenario "the button text changes and they see the change in the table" do
 
       user = User.create(email_address: 'david@example.com', password: 'password')
       link = user.links.create(url: 'https://www.turing.io', title: 'Turing')
